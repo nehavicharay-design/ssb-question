@@ -12,4 +12,75 @@
       height: 100vh;
       font-family: Arial, sans-serif;
       text-align: center;
-      background: linear-gradient(135deg, #ff9a9e, #fa
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    #yesBtn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      button { width: 45%; padding: 12px; font-size: 1rem; }
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      white-space: pre-wrap;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will u clear the SSB?</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes 🤟🤸</button>
+      <button id="noBtn">No 🥀</button>
+    </div>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('
+
+
