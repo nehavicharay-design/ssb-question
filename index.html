@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SSB Question</title>
   <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       display: flex;
       justify-content: center;
@@ -14,12 +21,11 @@
       text-align: center;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       padding: 20px;
-      overflow: hidden;
     }
 
     .container {
-      max-width: 400px;
       width: 100%;
+      max-width: 400px;
     }
 
     h1 {
@@ -33,7 +39,6 @@
       justify-content: space-around;
       gap: 20px;
       flex-wrap: wrap;
-      position: relative;
     }
 
     button {
@@ -42,8 +47,7 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      position: relative;
+      transition: all 0.3s ease;
     }
 
     #yesBtn {
@@ -54,12 +58,63 @@
     #noBtn {
       background-color: #f44336;
       color: white;
+      position: relative;
     }
 
+    /* Responsive for small screens */
     @media (max-width: 480px) {
-      h1 { font-size: 1.5rem; }
-      button { width: 45%; padding: 12px; font-size: 1rem; }
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        width: 45%;
+        padding: 12px;
+        font-size: 1rem;
+      }
     }
 
-    #m
+    #message {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      white-space: pre-wrap;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will u clear the SSB?</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes 🤟🤸</button>
+      <button id="noBtn">No 🥀</button>
+    </div>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+
+    // Function to move No button randomly
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 40);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 40);
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+
+    // Function when Yes button is clicked
+    yesBtn.addEventListener('click', () => {
+      message.textContent = `YAAAAYYY GOOD JOB BUBBUUUU           へ   ♡   ╱|、
+     ૮  -   ՛ )      (\`   -  7
+       /   ⁻  ៸|       |、⁻〵
+ 乀 (ˍ, ل ل      じしˍ,)ノ`;
+    });
+  </script>
+</body>
+</html>
+m
 
