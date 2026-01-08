@@ -21,7 +21,7 @@
       text-align: center;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       padding: 20px;
-      overflow: hidden;
+      overflow: hidden; /* prevents buttons from going outside screen */
     }
 
     .container {
@@ -40,7 +40,7 @@
       justify-content: space-around;
       gap: 20px;
       flex-wrap: wrap;
-      position: relative;
+      position: relative; /* container for moving buttons */
     }
 
     button {
@@ -49,7 +49,7 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       position: relative;
     }
 
@@ -63,6 +63,7 @@
       color: white;
     }
 
+    /* Responsive for small screens */
     @media (max-width: 480px) {
       h1 {
         font-size: 1.5rem;
@@ -98,22 +99,18 @@
     const yesBtn = document.getElementById('yesBtn');
     const message = document.getElementById('message');
 
-    let escapeSpeed = 1; // speed multiplier
-
     function moveButton() {
       const btnWidth = noBtn.offsetWidth;
       const btnHeight = noBtn.offsetHeight;
-      const maxX = window.innerWidth - btnWidth - 20;
+      const maxX = window.innerWidth - btnWidth - 20; // 20px padding
       const maxY = window.innerHeight - btnHeight - 20;
 
-      const x = Math.random() * maxX * escapeSpeed;
-      const y = Math.random() * maxY * escapeSpeed;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
 
       noBtn.style.position = 'absolute';
-      noBtn.style.left = Math.min(x, maxX) + 'px';
-      noBtn.style.top = Math.min(y, maxY) + 'px';
-
-      escapeSpeed += 0.2; // button gets faster every time
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
     }
 
     // Desktop hover
@@ -121,27 +118,18 @@
 
     // Mobile touch
     noBtn.addEventListener('touchstart', (e) => {
-      e.preventDefault(); // prevent tap from activating button
+      e.preventDefault(); // prevents the tap from clicking
       moveButton();
     });
 
     // Yes button click
     yesBtn.addEventListener('click', () => {
       message.textContent = `YAAAAYYY GOOD JOB BUBBUUUU           へ   ♡   ╱|、
-     ૮  -   ՛ )      (\`   -  7
+               へ   ♡   ╱|、
+     ૮  -   ՛ )      (`   -  7
        /   ⁻  ៸|       |、⁻〵
- 乀 (ˍ, ل ل      じしˍ,)ノ`;
-    });
-
-    // Optional: reset No button if window resizes
-    window.addEventListener('resize', () => {
-      noBtn.style.position = 'relative';
-      noBtn.style.left = '';
-      noBtn.style.top = '';
-      escapeSpeed = 1;
+ 乀 (ˍ, ل ل      じしˍ,)ノ
     });
   </script>
 </body>
 </html>
-
-
