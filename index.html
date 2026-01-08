@@ -1,70 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SSB Question</title>
-<style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSB Question</title>
+  <style>
+    /* Basic reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-        background: #ffe6e6;
-        color: #b30059;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      padding: 20px;
+      overflow: hidden;
     }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+    }
+
     h1 {
-        font-size: 2.6rem;
-        margin-bottom: 30px;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #333;
     }
-    #btnContainer {
-        display: flex;
-        justify-content: center;
-        gap: 30px;
-        margin-top: 40px;
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+      gap: 20px;
+      flex-wrap: wrap;
+      position: relative;
     }
+
     button {
-        padding: 15px 30px;
-        font-size: 1.2rem;
-        border: 3px solid #b30059;
-        border-radius: 8px;
-        background: white;
-        cursor: pointer;
-        transition: 0.3s;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
     }
-    button:hover {
-        background: #ffb3d1;
+
+    #yesBtn {
+      background-color: #4caf50;
+      color: white;
     }
-</style>
+
+    #noBtn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      button {
+        width: 45%;
+        padding: 12px;
+        font-size: 1rem;
+      }
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.2rem;
+      white-space: pre-wrap;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Will u clear the SSB?</h1>
+    <div class="buttons">
+      <button id="yesBtn">Yes 🤟🤸</button>
+      <button id="noBtn">No 🥀</button>
+    </div>
+    <div id="message"></div>
+  </div>
 
-<h1>💌 Will u clear ur SSB?</h1>
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
 
-<div id="btnContainer">
-    <button id="yesBtn">Yes 💖</button>
-    <button id="noBtn">No 💔</button>
-</div>
+    let escapeSpeed = 1; // speed multiplier
 
-<script>
-    const noBtn = document.getElementById("noBtn");
-    const yesBtn = document.getElementById("yesBtn");
+    function moveButton() {
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+      const maxX = window.innerWidth - btnWidth - 20;
+      const maxY = window.innerHeight - btnHeight - 20;
 
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
-        noBtn.style.position = "absolute";
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
+      const x = Math.random() * maxX * escapeSpeed;
+      const y = Math.random() * maxY * escapeSpeed;
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = Math.min(x, maxX) + 'px';
+      noBtn.style.top = Math.min(y, maxY) + 'px';
+
+      escapeSpeed += 0.2; // button gets faster every time
+    }
+
+    // Desktop hover
+    noBtn.addEventListener('mouseover', moveButton);
+
+    // Mobile touch
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault(); // prevent tap from activating button
+      moveButton();
     });
 
-    yesBtn.addEventListener("click", () => {
-        document.body.innerHTML = `
-            <h1>🎉 YES! 🎉</h1>
-            <p>You WILL clear your SSB 💪🇮🇳<br>All the best!</p>
-        `;
+    // Yes button click
+    yesBtn.addEventListener('click', () => {
+      message.textContent = `YAAAAYYY GOOD JOB BUBBUUUU           へ   ♡   ╱|、
+     ૮  -   ՛ )      (\`   -  7
+       /   ⁻  ៸|       |、⁻〵
+ 乀 (ˍ, ل ل      じしˍ,)ノ`;
     });
-</script>
 
+    // Optional: reset No button if window resizes
+    window.addEventListener('resize', () => {
+      noBtn.style.position = 'relative';
+      noBtn.style.left = '';
+      noBtn.style.top = '';
+      escapeSpeed = 1;
+    });
+  </script>
 </body>
 </html>
+
 
