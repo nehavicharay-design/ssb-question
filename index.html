@@ -3,98 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SSB Question</title>
+<title>SSB Prediction</title>
 <style>
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    overflow: hidden;
-    padding: 20px;
-  }
-  .container { max-width: 400px; width: 100%; }
-  h1 { font-size: 2rem; margin-bottom: 40px; color: #333; }
-  .buttons { display: flex; justify-content: space-around; gap: 20px; flex-wrap: wrap; }
-  button {
-    padding: 15px 25px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    z-index: 10; /* ensures buttons are clickable */
-    position: relative; /* keeps Yes clickable */
-  }
-  #yesBtn { background-color: #4caf50; color: white; }
-  #noBtn { background-color: #f44336; color: white; }
-  @media (max-width: 480px) {
-    h1 { font-size: 1.5rem; }
-    button { width: 45%; padding: 12px; font-size: 1rem; }
-  }
-  #message { margin-top: 30px; font-size: 1.2rem; white-space: pre-wrap; color: #333; }
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background: linear-gradient(135deg, #f0c27b, #4b1248);
+        font-family: 'Arial', sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 50px;
+    }
+
+    button {
+        font-size: 1.5rem;
+        padding: 15px 30px;
+        margin: 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    #yesBtn {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #f44336;
+        color: white;
+        position: absolute;
+    }
+
+    #message {
+        margin-top: 50px;
+        font-size: 1.2rem;
+        white-space: pre-wrap; /* preserves the ASCII art formatting */
+    }
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Will u clear the SSB?</h1>
-  <div class="buttons">
-    <button id="yesBtn">Yes 🤟🤸</button>
-    <button id="noBtn">No 🥀</button>
-  </div>
-  <div id="message"></div>
-</div>
+<h1>Will u clear the SSB?</h1>
+<button id="yesBtn">Yes 🤟🤸</button>
+<button id="noBtn">No🥀</button>
+
+<div id="message"></div>
 
 <script>
-const noBtn = document.getElementById('noBtn');
-const yesBtn = document.getElementById('yesBtn');
-const message = document.getElementById('message');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
 
-// Teleport function for No button
-function teleportButton() {
-  const btnWidth = noBtn.offsetWidth;
-  const btnHeight = noBtn.offsetHeight;
-  const maxX = window.innerWidth - btnWidth - 20;
-  const maxY = window.innerHeight - btnHeight - 20;
+    // Teleport the "No" button randomly when hovered
+    noBtn.addEventListener('mouseenter', () => {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+    });
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+    // Show message on Yes button click
+    yesBtn.addEventListener('click', () => {
+        message.textContent = `YAAAAYYY GOOD JOB BUBBUUUU へ ♡ ╱|、 ૮ - ՛ ) ( - 7 / ⁻ ៸| |、⁻〵 乀 (ˍ, ل ل じしˍ,)ノ`;
+        // Optionally hide buttons after click
+        yesBtn.style.display = 'none';
+        noBtn.style.display = 'none';
+    });
 
-  // Use fixed positioning so it moves anywhere on screen
-  noBtn.style.position = 'fixed';
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
-}
-
-// No button moves when trying to click (desktop)
-noBtn.addEventListener('mouseenter', teleportButton);
-
-// No button moves on mobile tap
-noBtn.addEventListener('touchstart', (e) => {
-  e.preventDefault(); // prevent accidental tap
-  teleportButton();
-});
-
-// Yes button click
-yesBtn.addEventListener('click', () => {
-  message.textContent = `YAAAAYYY GOOD JOB BUBBUUUU へ ♡ ╱|、
-  ૮ - ՛ ) ( - 7
-    / ⁻  ៸| |、⁻〵
-乀 (ˍ, ل ل じしˍ,)ノ`;
-});
-
-// Reset No button on resize
-window.addEventListener('resize', () => {
-  noBtn.style.position = 'relative';
-  noBtn.style.left = '';
-  noBtn.style.top = '';
-});
 </script>
 </body>
 </html>
-
-
 
